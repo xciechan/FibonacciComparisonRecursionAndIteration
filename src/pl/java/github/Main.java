@@ -11,23 +11,42 @@ package pl.java.github;
 public class Main {
 
     public static void main(String[] args) {
-        for (int i=0; i<=40; i++){
-            System.out.println(i + " : " + fibonacciRecursion(i) + " : " + fibonacciIteration(i));
+        int rangeDisplayFibonacci = 45;
+        displayComparisonFibonacci(rangeDisplayFibonacci);
+
+    }
+
+    public static  void displayComparisonFibonacci(int range){
+        long startTime;
+        long stopTime;
+
+        for (int i=0; i<=range; i++) {
+            startTime = System.nanoTime();
+            System.out.print(i + "_r : " + fibonacciRecursion(i) + " : ");
+            stopTime = System.nanoTime();
+            System.out.println((stopTime - startTime) + "ns (" + (stopTime - startTime) / 1000000 + "ms)");
+
+            startTime = System.nanoTime();
+            System.out.print(i + "_i : " + fibonacciIteration(i) + " : ");
+            stopTime = System.nanoTime();
+            System.out.println((stopTime - startTime) + "ns (" + (stopTime - startTime) / 1000000 + "ms)");
+
+            System.out.println();
         }
 
     }
 
-    public static int fibonacciRecursion (int number){
+    public static long fibonacciRecursion (int number){
         if (number == 0) return 0;
         if (number == 1) return 1;
 
         return fibonacciRecursion(number - 1) + fibonacciRecursion(number - 2);
     }
 
-    public static int fibonacciIteration (int number){
-        int numberSmaller = 1;
-        int numberBigger = 0; // the number is smaller for the first number = 0
-        int numberAuxiliary;
+    public static long fibonacciIteration (int number){
+        long numberSmaller = 1;
+        long numberBigger = 0; // the number is smaller for the first number = 0
+        long numberAuxiliary;
 
         for (int i = 0; i<number; i++){
             numberAuxiliary = numberBigger;
@@ -37,6 +56,5 @@ public class Main {
 
         return numberBigger;
     }
-
 
 }
